@@ -14,19 +14,45 @@ class MainActivity : AppCompatActivity() {
     lateinit var timer:CountDownTimer
     lateinit var startButton:Button
     lateinit var coutdownDisplay:TextView
+    lateinit var startButton30:Button
+    lateinit var startButton60:Button
+    lateinit var startButton90:Button
+    lateinit var startButton120:Button
 
-    val timeToCountDownInMs = 5000L
+    var timeToCountDownInMs = 5000L
     val timeTicks = 1000L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
        startButton = findViewById<Button>(R.id.startCountdownButton)
        startButton.setOnClickListener(){
            startCountDown(it)
+
+
        }
-       coutdownDisplay = findViewById<TextView>(R.id.countDownView)
+       startButton30= findViewById<Button>(R.id.startCountdownButton30)
+        startButton30.setOnClickListener(){
+            timeToCountDownInMs = 30000L
+
+        }
+       startButton60= findViewById<Button>(R.id.startCountdownButton60)
+        startButton60.setOnClickListener(){
+            timeToCountDownInMs = 60000L
+
+        }
+       startButton90= findViewById<Button>(R.id.startCountdownButton90)
+        startButton90.setOnClickListener(){
+            timeToCountDownInMs = 900000L
+
+        }
+       startButton120= findViewById<Button>(R.id.startCountdownButton120)
+        startButton120.setOnClickListener(){
+            timeToCountDownInMs = 120000L
+
+        }
+
+        coutdownDisplay = findViewById<TextView>(R.id.countDownView)
 
     }
 
@@ -40,6 +66,7 @@ class MainActivity : AppCompatActivity() {
             override fun onTick(millisUntilFinished: Long) {
                updateCountDownDisplay(millisUntilFinished)
             }
+
         }
 
         timer.start()
@@ -48,5 +75,11 @@ class MainActivity : AppCompatActivity() {
     fun updateCountDownDisplay(timeInMs:Long){
         coutdownDisplay.text = millisecondsToDescriptiveTime(timeInMs)
     }
+    fun cancelTimer(timeInMs: Long){
+        if(timeInMs >= 0){
+        timer.cancel()
+        }
+    }
+
 
 }
